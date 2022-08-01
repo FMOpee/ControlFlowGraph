@@ -14,10 +14,19 @@ public class TokenNode {
 
     public void addParent(TokenNode p){
         parent = p;
-        p.addChild(this);
     }
 
-    public void addChild(TokenNode c){
-        children.add(c);
+    public void addChildren(ArrayList<TokenNode> c){
+        children.addAll(c);
+        for (TokenNode child: children){
+            addParent(this);
+        }
+    }
+
+    public String toString(){
+        String ret = "<"+type+" : "+argument+">{\n";
+        for (TokenNode child: children) ret+=child+"\n";
+        ret+="}";
+        return ret;
     }
 }
