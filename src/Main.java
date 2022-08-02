@@ -75,9 +75,9 @@ public class Main {
         reattachedTokens.add("}");
 
 
-        for (String s: reattachedTokens) {
-            System.out.println(s);
-        }
+//        for (String s: reattachedTokens) {
+//            System.out.println(s);
+//        }
 
         TokenNode root = tokenNodeProducer();
 

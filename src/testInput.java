@@ -1,11 +1,22 @@
 import java.util.Scanner;
 
 public class testInput {
-    public static void main(int a, int b, int c, int d) {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+        int d = scanner.nextInt();
         if(a<5){
             b+=5;
             c*=a;
             System.out.println("if1");
+            if(a<3){
+                System.out.println("lol");
+            }
+            else{
+                System.out.println("not lol");
+            }
         }
         else if( a<7){
             d=10;

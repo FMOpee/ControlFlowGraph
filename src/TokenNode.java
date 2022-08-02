@@ -24,9 +24,12 @@ public class TokenNode {
     }
 
     public String toString(){
-        String ret = "<"+type+" : "+argument+">{\n";
-        for (TokenNode child: children) ret+=child+"\n";
-        ret+="}";
+        String ret = "<"+type+" : "+argument+">";
+        if(children.size()!=0){
+            ret+="[\n";
+            for (TokenNode child: children) ret+=child+"\n";
+            ret+="]";
+        }
         return ret;
     }
 }
