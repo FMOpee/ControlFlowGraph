@@ -18,14 +18,13 @@ public class CreateCFG {
             if(blockStarters.contains(child.type))
                 count++;
         }
-//        System.out.println("total block in :"+ root+ " is "+ count);
 
         //add node for each block
         ArrayList<GraphNode> blockPoints = addLinearBlock(count,target);
 
         //add sequence foreach block
         for (int i =0;i<root.children.size();i++){
-            ArrayList<GraphNode> childrenTargets =new ArrayList<>();
+            ArrayList<GraphNode> childrenTargets;
             if(blockStarters.contains(root.children.get(i).type)){
                 int n =1;
                 for (int j=i+1; j<root.children.size();j++){
@@ -35,14 +34,18 @@ public class CreateCFG {
                 if(root.children.get(i).type.equals("if")){
                     boolean hasElse = root.children.get(i+n-1).type.equals("else");
                     childrenTargets = addIfBlock(hasElse, n, blockPoints.get(blockIndex++));
+
+                    //recurse for children of each one of the block
+                    for (int j=i; j-i<n; j++){
+                        graphCreator(root.children.get(j),childrenTargets.get(j-i));
+                    }
+                }
+                else if(root.children.get(i).type.equals("for")){
+                    GraphNode node = addForBlock(blockPoints.get(blockIndex++));
+                    for (TokenNode tn: root.children.get(i).children)
+                        graphCreator(tn,node);
                 }
 
-
-                //check for children of each one
-                //graphCreator(root.children.get(i),childrenTargets.get(0));
-                for (int j=i; j-i<n; j++){
-                    graphCreator(root.children.get(j),childrenTargets.get(j-i));
-                }
             }
         }
 
@@ -107,6 +110,23 @@ public class CreateCFG {
         }
 
         return list;
+    }
+
+    private GraphNode addForBlock(GraphNode target){
+        GraphNode n1 = new GraphNode(id());
+        GraphNode n2 = new GraphNode(id());
+        GraphNode n3 = new GraphNode(id());
+
+        n3.to = target.to;
+        n3.addDestination(n1);
+
+        target.to = new ArrayList<>();
+        target.addDestination(n1);
+
+        n1.addDestination(n2);
+        n2.addDestination(n3);
+
+        return n2;
     }
 
     private int id(){

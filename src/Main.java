@@ -159,17 +159,21 @@ public class Main {
     }
 
     private void dfs(GraphNode g){
+        g.visited =true;
         for (GraphNode c: g.to){
-            Edge newEdge= new Edge(g,c);
+            Edge newEdge = new Edge(g, c);
             boolean found = false;
-            for (Edge edge: edges){
-                if(edge.toString().equals(newEdge.toString())){
-                    found= true;
+            for (Edge edge : edges) {
+                if (edge.toString().equals(newEdge.toString())) {
+                    found = true;
                     break;
                 }
             }
-            if(!found) edges.add(newEdge);
-            dfs(c);
+
+            if (!found) edges.add(newEdge);
+
+            if(!c.visited)
+                dfs(c);
         }
     }
 

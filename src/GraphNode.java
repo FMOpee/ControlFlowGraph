@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class GraphNode {
     int id;
     ArrayList<GraphNode> to = new ArrayList<>();
+    boolean visited = false;
 
     public GraphNode(int id){
         this.id = id;
