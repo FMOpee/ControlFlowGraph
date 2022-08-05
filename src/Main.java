@@ -88,23 +88,15 @@ public class Main {
         System.out.println(root);
 
         CreateCFG creator = new CreateCFG();
-        start = new GraphNode();
-        main = new GraphNode();
+        start = new GraphNode(0);
+        main = new GraphNode(1);
         start.addDestination(main);
-        end = new GraphNode();
+        end = new GraphNode(2);
         main.addDestination(end);
 
         creator.graphCreator(root, main);
 
-        GraphNode gn = start;
-        int nodeNumber =0;
-        while (true){
-            System.out.println(gn + " to "+ gn.to);
-            nodeNumber++;
-            if(gn.to.size() ==0) break;
-            gn = gn.child(0);
-        }
-        System.out.println(nodeNumber);
+        System.out.println(start);
 
     }
 

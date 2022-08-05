@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 
 public class GraphNode {
+    int id;
     ArrayList<GraphNode> to = new ArrayList<>();
+
+    public GraphNode(int id){
+        this.id = id;
+    }
 
     public void addDestination(GraphNode gn){
         to.add(gn);
@@ -17,5 +22,9 @@ public class GraphNode {
 
     public  GraphNode child(int index){
         return to.get(index);
+    }
+
+    public String toString(){
+        return " "+id+":"+to+" ";
     }
 }
