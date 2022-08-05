@@ -37,7 +37,8 @@ public class CreateCFG {
                 }
 
                 //check for children of each one
-                for (int j=i; !blockStarters.contains(root.children.get(j).type); j++){
+                graphCreator(root.children.get(i),childrenTargets.get(0));
+                for (int j=i+1; j<root.children.size() && !blockStarters.contains(root.children.get(j).type); j++){
                     graphCreator(root.children.get(j),childrenTargets.get(j-i));
                 }
             }
