@@ -6,6 +6,8 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Main {
+    public static GraphNode start, end, main;
+
     private final ArrayList<String> keyWordsRemovable = new ArrayList<>(Arrays.asList(
             "import","java.util.Scanner","public","class","static","void", "int","String","float","double","boolean",";"
     ));
@@ -79,9 +81,31 @@ public class Main {
 //            System.out.println(s);
 //        }
 
-        TokenNode root = tokenNodeProducer();
+
+
+        TokenNode root = tokenNodeProducer().children.get(0);
 
         System.out.println(root);
+
+        CreateCFG creator = new CreateCFG();
+        start = new GraphNode();
+        main = new GraphNode();
+        start.addDestination(main);
+        end = new GraphNode();
+        main.addDestination(end);
+
+        creator.graphCreator(root, main);
+
+        GraphNode gn = start;
+        int nodeNumber =0;
+        while (true){
+            System.out.println(gn + " to "+ gn.to);
+            nodeNumber++;
+            if(gn.to.size() ==0) break;
+            gn = gn.child(0);
+        }
+        System.out.println(nodeNumber);
+
     }
 
     private ArrayList<String> tokenizer(File inputCode) throws FileNotFoundException {

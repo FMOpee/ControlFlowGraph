@@ -7,6 +7,7 @@ public class testInput {
         int b = scanner.nextInt();
         int c = scanner.nextInt();
         int d = scanner.nextInt();
+
         if(a<5){
             b+=5;
             c*=a;
@@ -16,6 +17,9 @@ public class testInput {
             }
             else{
                 System.out.println("not lol");
+            }
+            if(a<b){
+                System.out.println("lol 2: electric boogaloo");
             }
         }
         else if( a<7){
@@ -28,10 +32,7 @@ public class testInput {
             a-=6;
             System.out.println("else1");
         }
-        for(int i = 1; a<d; a++, i++){
-            System.out.println("for"+i);
-            c+=a;
-        }
+
         if(c>50){
             c-=20;
             System.out.println("if2");
@@ -39,6 +40,15 @@ public class testInput {
         if(d>c/2){
             System.out.println("if3");
             d+=5;
+            if(a>b){
+                System.out.println("xd");
+            }
+            else if(b>c){
+                System.out.println("idk");
+            }
+            else{
+                System.out.println("kys");
+            }
         }
         else{
             System.out.println("else3");
