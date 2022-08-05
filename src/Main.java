@@ -11,6 +11,7 @@ public class Main {
     private final ArrayList<String> keyWordsRemovable = new ArrayList<>(Arrays.asList(
             "import","java.util.Scanner","public","class","static","void", "int","String","float","double","boolean",";"
     ));
+    private ArrayList<Edge> edges = new ArrayList<>();
 
     private int index = 0;
     private ArrayList<String> reattachedTokens;
@@ -96,7 +97,9 @@ public class Main {
 
         creator.graphCreator(root, main);
 
-        System.out.println(start);
+        //System.out.println(start);
+        dfs(start);
+        for (Edge e: edges) System.out.println(e);
 
     }
 
@@ -153,6 +156,21 @@ public class Main {
         tokenNode.addChildren(children);
 
         return tokenNode;
+    }
+
+    private void dfs(GraphNode g){
+        for (GraphNode c: g.to){
+            Edge newEdge= new Edge(g,c);
+            boolean found = false;
+            for (Edge edge: edges){
+                if(edge.toString().equals(newEdge.toString())){
+                    found= true;
+                    break;
+                }
+            }
+            if(!found) edges.add(newEdge);
+            dfs(c);
+        }
     }
 
 }

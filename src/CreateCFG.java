@@ -30,6 +30,7 @@ public class CreateCFG {
                 int n =1;
                 for (int j=i+1; j<root.children.size();j++){
                     if(!blockStarters.contains(root.children.get(j).type)) n++;
+                    else break;
                 }
                 if(root.children.get(i).type.equals("if")){
                     childrenTargets = addIfBlock(n,blockPoints.get(blockIndex++));

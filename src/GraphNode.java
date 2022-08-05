@@ -25,6 +25,6 @@ public class GraphNode {
     }
 
     public String toString(){
-        return " "+id+":"+to+" ";
+        return id+"";
     }
 }
