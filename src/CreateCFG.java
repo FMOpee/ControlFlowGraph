@@ -45,6 +45,11 @@ public class CreateCFG {
                     for (TokenNode tn: root.children.get(i).children)
                         graphCreator(tn,node);
                 }
+                else if(root.children.get(i).type.equals("while")){
+                    GraphNode node = addForBlock(blockPoints.get(blockIndex++));
+                    for (TokenNode tn: root.children.get(i).children)
+                        graphCreator(tn,node);
+                }
 
             }
         }
@@ -127,6 +132,15 @@ public class CreateCFG {
         n2.addDestination(n3);
 
         return n2;
+    }
+
+    private GraphNode addWhileBlock(GraphNode target){
+        GraphNode n1 = new GraphNode(id());
+
+        target.addDestination(n1);
+        n1.addDestination(target);
+
+        return n1;
     }
 
     private int id(){
