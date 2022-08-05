@@ -27,11 +27,7 @@ public class testInput {
             a-=4;
             System.out.println("else1if1");
         }
-        else {
-            d=15;
-            a-=6;
-            System.out.println("else1");
-        }
+        
 
         if(c>50){
             c-=20;

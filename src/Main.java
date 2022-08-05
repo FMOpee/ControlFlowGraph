@@ -86,7 +86,7 @@ public class Main {
 
         TokenNode root = tokenNodeProducer().children.get(0);
 
-        System.out.println(root);
+//        System.out.println(root);
 
         CreateCFG creator = new CreateCFG();
         start = new GraphNode(0);

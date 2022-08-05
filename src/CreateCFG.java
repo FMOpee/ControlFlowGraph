@@ -33,12 +33,14 @@ public class CreateCFG {
                     else break;
                 }
                 if(root.children.get(i).type.equals("if")){
-                    childrenTargets = addIfBlock(n,blockPoints.get(blockIndex++));
+                    boolean hasElse = root.children.get(i+n-1).type.equals("else");
+                    childrenTargets = addIfBlock(hasElse, n, blockPoints.get(blockIndex++));
                 }
 
+
                 //check for children of each one
-                graphCreator(root.children.get(i),childrenTargets.get(0));
-                for (int j=i+1; j<root.children.size() && !blockStarters.contains(root.children.get(j).type); j++){
+                //graphCreator(root.children.get(i),childrenTargets.get(0));
+                for (int j=i; j-i<n; j++){
                     graphCreator(root.children.get(j),childrenTargets.get(j-i));
                 }
             }
@@ -64,7 +66,7 @@ public class CreateCFG {
         return list;
     }
 
-    private ArrayList<GraphNode> addIfBlock(int num, GraphNode target){
+    private ArrayList<GraphNode> addIfBlock(boolean hasElse, int num, GraphNode target){
         ArrayList<GraphNode> list= new ArrayList<>();
 
         if(num == 1){
@@ -77,7 +79,7 @@ public class CreateCFG {
 
             list.add(n1);
         }
-        else {
+        else if(hasElse){
             GraphNode end = new GraphNode(id());
 
             for (int i=0; i<num; i++){
@@ -88,6 +90,20 @@ public class CreateCFG {
 
             end.to = target.to;
             target.overrideTo(list);
+        }
+        else {
+
+            GraphNode end = new GraphNode(id());
+
+            for (int i=0; i<num; i++){
+                GraphNode gn =new GraphNode(id());
+                gn.addDestination(end);
+                list.add(gn);
+            }
+
+            end.to = target.to;
+            target.overrideTo(list);
+            target.addDestination(end);
         }
 
         return list;
