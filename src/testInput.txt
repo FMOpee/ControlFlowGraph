@@ -1,16 +1,56 @@
-public class testInput {
-    public static void main(int[] args) {
-        while(y<10){
-           " y++";
-            System.out.println(y);
-            if(i>z){
-                idk();
+
+
+public class Main {
+    public void doStuff(){
+
+        for(c1){
+            if(c2){
+                dlfblfdk
             }
-            else{
-                idk();
+            else if(c3){
+                ldv;lvs
+            }
+            else if(c4){
+                vksv
             }
 
+            if(c5){
+                klvksdls
+            }
         }
 
+        for(c6){
+            if(c7){
+                while(c8){
+                    cknack
+                }
+                lknkl
+                ppl
+            }
+        }
+
+        for(c9){
+            if(c10){
+                if(c11){
+                    casca
+                    if(c12){
+                        kcsalca
+                    }
+                }
+                else if(c13){
+                    alcsklaksc
+                }
+                else{
+                    pcapsa
+                }
+            }
+        }
+
+        for(c14){
+            plvdas
+        }
+
+
     }
+
 }

@@ -122,7 +122,7 @@ public class CreateCFG {
         GraphNode n2 = new GraphNode(id());
         GraphNode n3 = new GraphNode(id());
 
-        n3.to = target.to;
+        n1.to = target.to;
         n3.addDestination(n1);
 
         target.to = new ArrayList<>();
