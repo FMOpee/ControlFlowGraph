@@ -31,24 +31,24 @@ public class CreateCFG {
                     if(!blockStarters.contains(root.children.get(j).type)) n++;
                     else break;
                 }
-                if(root.children.get(i).type.equals("if")){
-                    boolean hasElse = root.children.get(i+n-1).type.equals("else");
-                    childrenTargets = addIfBlock(hasElse, n, blockPoints.get(blockIndex++));
+                switch (root.children.get(i).type) {
+                    case "if" -> {
+                        boolean hasElse = root.children.get(i + n - 1).type.equals("else");
+                        childrenTargets = addIfBlock(hasElse, n, blockPoints.get(blockIndex++));
 
-                    //recurse for children of each one of the block
-                    for (int j=i; j-i<n; j++){
-                        graphCreator(root.children.get(j),childrenTargets.get(j-i));
+                        //recurse for children of each one of the block
+                        for (int j = i; j - i < n; j++) {
+                            graphCreator(root.children.get(j), childrenTargets.get(j - i));
+                        }
                     }
-                }
-                else if(root.children.get(i).type.equals("for")){
-                    GraphNode node = addForBlock(blockPoints.get(blockIndex++));
-//                    for (TokenNode tn: root.children.get(i).children)
-                    graphCreator(root.children.get(i),node);
-                }
-                else if(root.children.get(i).type.equals("while")){
-                    GraphNode node = addWhileBlock(blockPoints.get(blockIndex++));
-//                    for (TokenNode tn: root.children.get(i).children)
-                    graphCreator(root.children.get(i),node);
+                    case "for" -> {
+                        GraphNode node = addForBlock(blockPoints.get(blockIndex++));
+                        graphCreator(root.children.get(i), node);
+                    }
+                    case "while" -> {
+                        GraphNode node = addWhileBlock(blockPoints.get(blockIndex++));
+                        graphCreator(root.children.get(i), node);
+                    }
                 }
 
             }
