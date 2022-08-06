@@ -42,13 +42,13 @@ public class CreateCFG {
                 }
                 else if(root.children.get(i).type.equals("for")){
                     GraphNode node = addForBlock(blockPoints.get(blockIndex++));
-                    for (TokenNode tn: root.children.get(i).children)
-                        graphCreator(tn,node);
+//                    for (TokenNode tn: root.children.get(i).children)
+                    graphCreator(root.children.get(i),node);
                 }
                 else if(root.children.get(i).type.equals("while")){
-                    GraphNode node = addForBlock(blockPoints.get(blockIndex++));
-                    for (TokenNode tn: root.children.get(i).children)
-                        graphCreator(tn,node);
+                    GraphNode node = addWhileBlock(blockPoints.get(blockIndex++));
+//                    for (TokenNode tn: root.children.get(i).children)
+                    graphCreator(root.children.get(i),node);
                 }
 
             }

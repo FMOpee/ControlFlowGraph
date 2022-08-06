@@ -17,7 +17,7 @@ public class Main {
     private ArrayList<String> reattachedTokens;
 
     public void doStuff() throws FileNotFoundException {
-        ArrayList<String> tokens = tokenizer(new File("src\\testInput.java"));
+        ArrayList<String> tokens = tokenizer(new File("src\\testInput.txt"));
         reattachedTokens = new ArrayList<>();
 
         //refitting in a common syntax
@@ -109,52 +109,11 @@ public class Main {
 
         Scanner sc = new Scanner(inputCode);
         while (sc.hasNextLine()){
-            wholeCode.append(sc.nextLine());
+            wholeCode.append(sc.nextLine()).append("\n");
         }
 
-        String code = wholeCode.toString();
-//        ArrayList<Character> commentless= new ArrayList<>();
-//        boolean doubleSlash=false;
-//        boolean multiLineComment = false;
-//        boolean stringOpen = false;
-//        for (int i=0; i<code.toCharArray().length;i++){
-//            if(multiLineComment
-//                    && code.toCharArray()[i]=='*'
-//                    && code.toCharArray()[i+1]=='/'
-//            ){
-//                multiLineComment = false;
-//                i++;
-//            }
-//            else if(doubleSlash && code.toCharArray()[i]=='\n'){
-//                doubleSlash = false;
-//            }
-//            else if(stringOpen && code.toCharArray()[i] =='"'){
-//                stringOpen = false;
-//            }
-//            else if(!multiLineComment
-//                    && code.toCharArray()[i] == '/'
-//                    && code.toCharArray()[i+1] == '*'
-//            ){
-//                multiLineComment = true;
-//                i++;
-//            }
-//            else if(!doubleSlash
-//                    && code.toCharArray()[i]=='/'
-//                    && code.toCharArray()[i+1]=='/'
-//            ){
-//                doubleSlash = true;
-//                i++;
-//            }
-//            else if(!stringOpen && code.toCharArray()[i] =='"'){
-//                stringOpen = true;
-//            }
-//            else commentless.add(code.toCharArray()[i]);
-//
-//        }
-//        code = "";
-//        for (char c:commentless) code+=c;
-//        System.out.println(code);
-//
+        String code = commentRemover(wholeCode);
+
 ////        tokenFin.add(wholeCode.toString());
         tokenFin.add(code);
 
@@ -171,6 +130,53 @@ public class Main {
                 ), "(", true
             ), ")", true
         );
+    }
+
+    private String commentRemover(StringBuilder wholeCode) {
+        String code = wholeCode.toString();
+        ArrayList<Character> commentless= new ArrayList<>();
+        boolean doubleSlash=false;
+        boolean multiLineComment = false;
+        boolean stringOpen = false;
+        for (int i=0; i<code.length();i++){
+
+            char c1 = code.charAt(i);
+
+            char c2;
+            if(i<code.length()-1)
+                c2= code.charAt(i+1);
+            else c2='\n';
+
+            if(multiLineComment && c1=='*' && c2=='/'){
+                multiLineComment = false;
+                i++;
+            }
+            else if(doubleSlash && c1=='\n'){
+                doubleSlash = false;
+            }
+            else if(stringOpen && c1 =='"'){
+                stringOpen = false;
+            }
+            else if(!multiLineComment && c1== '/' && c2 == '*'){
+                multiLineComment = true;
+                i++;
+            }
+            else if(!doubleSlash && c1=='/' && c2=='/'){
+                doubleSlash = true;
+                i++;
+            }
+            else if(!stringOpen && c1 =='"'){
+                stringOpen = true;
+            }
+            else if(multiLineComment || stringOpen|| doubleSlash) {
+            }
+            else commentless.add(c1);
+
+        }
+        code = "";
+        for (char c:commentless) code+=c;
+//        System.out.println(code);
+        return code;
     }
 
     private ArrayList<String> tokenizationUnit(ArrayList<String> source, String delim, boolean ret){
