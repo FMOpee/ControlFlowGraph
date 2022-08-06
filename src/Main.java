@@ -9,7 +9,7 @@ public class Main {
     public static GraphNode start, end, main;
 
     private final ArrayList<String> keyWordsRemovable = new ArrayList<>(Arrays.asList(
-            "import","java.util.Scanner","public","class","static","void", "int","String","float","double","boolean",";"
+            "new","import","java.util.Scanner","public","class","static","void", "int","String","float","double","boolean",";"
     ));
     private ArrayList<Edge> edges = new ArrayList<>();
 
@@ -111,7 +111,52 @@ public class Main {
         while (sc.hasNextLine()){
             wholeCode.append(sc.nextLine());
         }
-        tokenFin.add(wholeCode.toString());
+
+        String code = wholeCode.toString();
+//        ArrayList<Character> commentless= new ArrayList<>();
+//        boolean doubleSlash=false;
+//        boolean multiLineComment = false;
+//        boolean stringOpen = false;
+//        for (int i=0; i<code.toCharArray().length;i++){
+//            if(multiLineComment
+//                    && code.toCharArray()[i]=='*'
+//                    && code.toCharArray()[i+1]=='/'
+//            ){
+//                multiLineComment = false;
+//                i++;
+//            }
+//            else if(doubleSlash && code.toCharArray()[i]=='\n'){
+//                doubleSlash = false;
+//            }
+//            else if(stringOpen && code.toCharArray()[i] =='"'){
+//                stringOpen = false;
+//            }
+//            else if(!multiLineComment
+//                    && code.toCharArray()[i] == '/'
+//                    && code.toCharArray()[i+1] == '*'
+//            ){
+//                multiLineComment = true;
+//                i++;
+//            }
+//            else if(!doubleSlash
+//                    && code.toCharArray()[i]=='/'
+//                    && code.toCharArray()[i+1]=='/'
+//            ){
+//                doubleSlash = true;
+//                i++;
+//            }
+//            else if(!stringOpen && code.toCharArray()[i] =='"'){
+//                stringOpen = true;
+//            }
+//            else commentless.add(code.toCharArray()[i]);
+//
+//        }
+//        code = "";
+//        for (char c:commentless) code+=c;
+//        System.out.println(code);
+//
+////        tokenFin.add(wholeCode.toString());
+        tokenFin.add(code);
 
         return tokenizationUnit(
             tokenizationUnit(
