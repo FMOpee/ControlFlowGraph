@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 
 public class Main {
     public static GraphNode start, end, main;
+    public static ArrayList<GraphNode> nodes = new ArrayList<>();
 
     private final ArrayList<String> keyWordsRemovable = new ArrayList<>(Arrays.asList(
             "new","import","java.util.Scanner","public","class","static","void", "int","String","float","double","boolean",";"
@@ -77,16 +78,7 @@ public class Main {
         }
         reattachedTokens.add("}");
 
-
-//        for (String s: reattachedTokens) {
-//            System.out.println(s);
-//        }
-
-
-
         TokenNode root = tokenNodeProducer().children.get(0);
-
-//        System.out.println(root);
 
         CreateCFG creator = new CreateCFG();
         start = new GraphNode(0);
@@ -97,9 +89,14 @@ public class Main {
 
         creator.graphCreator(root, main);
 
-        //System.out.println(start);
         dfs(start);
         for (Edge e: edges) System.out.println(e);
+
+        System.out.println("\n\n");
+
+        System.out.println("Nodes: "+nodes.size());
+        System.out.println("Edges: "+edges.size());
+        System.out.println("Cyclo-metric Complexity: "+(edges.size()-nodes.size()+2));
 
     }
 
@@ -210,6 +207,7 @@ public class Main {
     }
 
     private void dfs(GraphNode g){
+        nodes.add(g);
         g.visited =true;
         for (GraphNode c: g.to){
             Edge newEdge = new Edge(g, c);
