@@ -12,7 +12,7 @@ public class Main {
     private final ArrayList<String> keyWordsRemovable = new ArrayList<>(Arrays.asList(
             "new","import","java.util.Scanner","public","class","static","void", "int","String","float","double","boolean",";"
     ));
-    private ArrayList<Edge> edges = new ArrayList<>();
+    private final ArrayList<Edge> edges = new ArrayList<>();
 
     private int index = 0;
     private ArrayList<String> reattachedTokens;
@@ -130,7 +130,7 @@ public class Main {
     }
 
     private String commentRemover(StringBuilder wholeCode) {
-        String code = wholeCode.toString();
+        StringBuilder code = new StringBuilder(wholeCode.toString());
         ArrayList<Character> commentless= new ArrayList<>();
         boolean doubleSlash=false;
         boolean multiLineComment = false;
@@ -165,15 +165,16 @@ public class Main {
             else if(!stringOpen && c1 =='"'){
                 stringOpen = true;
             }
-            else if(multiLineComment || stringOpen|| doubleSlash) {
+            else {
+                if (!multiLineComment && !stringOpen && !doubleSlash) {
+                    commentless.add(c1);
+                }
             }
-            else commentless.add(c1);
 
         }
-        code = "";
-        for (char c:commentless) code+=c;
-//        System.out.println(code);
-        return code;
+        code = new StringBuilder();
+        for (char c:commentless) code.append(c);
+        return code.toString();
     }
 
     private ArrayList<String> tokenizationUnit(ArrayList<String> source, String delim, boolean ret){

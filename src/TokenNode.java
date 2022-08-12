@@ -19,17 +19,17 @@ public class TokenNode {
     public void addChildren(ArrayList<TokenNode> c){
         children.addAll(c);
         for (TokenNode child: children){
-            addParent(this);
+            child.addParent(this);
         }
     }
 
     public String toString(){
-        String ret = "<"+type+" : "+argument+">";
+        StringBuilder ret = new StringBuilder("<" + type + " : " + argument + ">");
         if(children.size()!=0){
-            ret+="[\n";
-            for (TokenNode child: children) ret+=child+"\n";
-            ret+="]";
+            ret.append("[\n");
+            for (TokenNode child: children) ret.append(child).append("\n");
+            ret.append("]");
         }
-        return ret;
+        return ret.toString();
     }
 }

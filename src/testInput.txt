@@ -1,7 +1,5 @@
-
-
 public class Main {
-    public void doStuff(){
+    public static void main(){
 
         for(c1){
             if(c2){
