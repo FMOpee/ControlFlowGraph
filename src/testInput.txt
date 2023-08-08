@@ -1,54 +1,41 @@
-public class Main {
-    public static void main(){
+import difflib.DiffUtils;
+import difflib.Patch;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
-        for(c1){
-            if(c2){
-                dlfblfdk
-            }
-            else if(c3){
-                ldv;lvs
-            }
-            else if(c4){
-                vksv
-            }
-
-            if(c5){
-                klvksdls
-            }
+public class CppFileChangeDetector {
+    public static void main(String[] args) {
+        if (args.length != 2) {
+            System.out.println("Usage: java CppFileChangeDetector <old_cpp_file> <new_cpp_file>");
+            return;
         }
 
-        for(c6){
-            if(c7){
-                while(c8){
-                    cknack
-                }
-                lknkl
-                ppl
+        String oldFilePath = args[0];
+        String newFilePath = args[1];
+
+
+        List<String> oldLines = Files.readAllLines(Path.of(oldFilePath));
+        List<String> newLines = Files.readAllLines(Path.of(newFilePath));
+
+        Patch<String> diff = DiffUtils.diff(oldLines, newLines);
+
+        System.out.println("Changes detected:");
+
+        for (var delta : diff.getDeltas()) {
+            if (delta.getType() == Patch.DeltaType.INSERT) {
+                System.out.println("Added:");
+            } else if (delta.getType() == Patch.DeltaType.DELETE) {
+                System.out.println("Removed:");
+            } else {
+                System.out.println("Modified:");
+            }
+
+            for (var line : delta.getTarget().getLines()) {
+                System.out.println(line);
             }
         }
-
-        for(c9){
-            if(c10){
-                if(c11){
-                    casca
-                    if(c12){
-                        kcsalca
-                    }
-                }
-                else if(c13){
-                    alcsklaksc
-                }
-                else{
-                    pcapsa
-                }
-            }
-        }
-
-        for(c14){
-            plvdas
-        }
-
-
     }
 
 }
